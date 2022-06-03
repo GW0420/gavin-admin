@@ -16,7 +16,9 @@
         ></svg-icon>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" style="width: 100%" @click="handleLogin">登录</el-button>
+        <el-button type="primary" style="width: 100%" :loading="loading" @click="handleLogin"
+          >登录</el-button
+        >
       </el-form-item>
     </el-form>
   </div>
@@ -24,11 +26,12 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
+import { useStore } from 'vuex'
 
 // 定义表单信息
 const form = reactive({
-  username: '',
-  password: ''
+  username: 'admin',
+  password: '123456'
 })
 // 定义dom元素节点
 const formRef = ref()
@@ -59,9 +62,14 @@ const handlePasswordType = () => {
   }
 }
 // 用户登录
+const loading = ref(false)
+const store = useStore()
 const handleLogin = () => {
-  formRef.value.validate(valid => {
+  loading.value = true
+  formRef.value.validate(async valid => {
     if (!valid) return
+    await store.dispatch('user/login', form)
+    loading.value = false
   })
 }
 </script>
