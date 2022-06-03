@@ -6,6 +6,11 @@
     <el-button type="info">Info</el-button>
     <el-button type="warning">Warning</el-button>
     <el-button type="danger">Danger</el-button>
+    <div>
+      <svg-icon icon="user" />
+      <svg-icon icon="password" />
+      <svg-icon icon="eye" />
+    </div>
   </div>
 </template>
 
