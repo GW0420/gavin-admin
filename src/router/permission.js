@@ -8,13 +8,10 @@ const whiteList = ['/login']
  */
 router.beforeEach(async (to, from, next) => {
   // 存在 token ，进入主页
-  console.log(store.getters.token)
-  // 快捷访问
   if (store.getters.token) {
     if (to.path === '/login') {
       next('/')
     } else {
-      console.log(44444)
       next()
     }
   } else {
