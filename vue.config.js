@@ -6,6 +6,16 @@ function resolve(dir) {
 }
 
 module.exports = defineConfig({
+  css: {
+    loaderOptions: {
+      sass: {
+        // 引入全局变量和 mixin
+        additionalData: `
+           @import '@/assets/styles/variables.module.scss';
+        `
+      }
+    }
+  },
   devServer: {
     // 配置反向代理
     proxy: {
