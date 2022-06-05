@@ -46,10 +46,17 @@ import AppMain from './components/AppMain.vue'
     .fix-header {
       width: 100%;
       height: 50px;
+      line-height: 50px;
+      padding: 0 20px;
+      box-sizing: border-box;
+      background: #fff;
+      box-shadow: 0 1px 4px #00152914;
     }
     .main {
       width: 100%;
       height: calc(100% - 50px);
+      padding: 20px;
+      box-sizing: border-box;
     }
   }
 }
