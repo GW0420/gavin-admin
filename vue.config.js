@@ -10,9 +10,14 @@ module.exports = defineConfig({
     loaderOptions: {
       sass: {
         // 引入全局变量和 mixin
-        additionalData: `
-           @import '@/assets/styles/variables.module.scss';
-        `
+        // additionalData: `
+        //    @import '@/assets/styles/variables.module.scss';
+        // `
+        additionalData: (content, loaderContext) => {
+          const { resourcePath } = loaderContext
+          if (resourcePath.endsWith('variables.module.scss')) return content
+          return `@import "@/assets/styles/variables.module.scss"; ${content}`
+        }
       }
     }
   },

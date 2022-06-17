@@ -2,7 +2,7 @@
   <div class="app-wrapper">
     <!-- 左侧menu -->
     <div class="sidebar">
-      <sidebar></sidebar>
+      <sidebar class="sidebar-content" :style="{ background: variables.menuBg }"></sidebar>
     </div>
     <div class="main-container">
       <!-- 顶部导航 -->
@@ -21,6 +21,7 @@
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar.vue'
 import AppMain from './components/AppMain.vue'
+import variables from '../assets/styles/variables.module.scss'
 </script>
 
 <style lang="scss">
@@ -34,7 +35,9 @@ import AppMain from './components/AppMain.vue'
     left: 0;
     bottom: 0;
     width: 210px;
-    background: $menuBg;
+    .sidebar-content {
+      height: 1000%;
+    }
   }
   .main-container {
     position: fixed;
@@ -46,7 +49,7 @@ import AppMain from './components/AppMain.vue'
     .fix-header {
       width: 100%;
       height: 50px;
-      line-height: 50px;
+      // line-height: 50px;
       padding: 0 20px;
       box-sizing: border-box;
       background: #fff;
