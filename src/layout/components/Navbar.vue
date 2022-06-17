@@ -2,6 +2,7 @@
   <div class="navbar">
     <div class="breads">
       <Hamburger></Hamburger>
+      <Breadcrumb></Breadcrumb>
     </div>
     <div class="right-menu">
       <el-dropdown trigger="click" @command="handleCommand">
@@ -22,6 +23,7 @@
 <script setup>
 import { useStore } from 'vuex'
 import Hamburger from '@/components/Hamburger'
+import Breadcrumb from '@/components/Breadcrumb'
 
 const store = useStore()
 const handleCommand = type => {
@@ -37,5 +39,9 @@ const handleCommand = type => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .breads {
+    display: flex;
+    align-items: center;
+  }
 }
 </style>
