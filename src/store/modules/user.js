@@ -2,6 +2,7 @@ import { Login, UserInfo } from '@/api/sys'
 import md5 from 'md5'
 import { setItem, getItem, removeAllItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
+import { setTimeStamp } from '@/utils/auth'
 import router from '@/router'
 import { ElMessage } from 'element-plus'
 
@@ -25,6 +26,7 @@ export default {
       const { username, password } = userInfo
       const res = await Login({ username, password: md5(password) })
       context.commit('setToken', res.token)
+      setTimeStamp() // 保存登录时间
       router.push('/')
       ElMessage.success('登录成功')
     },

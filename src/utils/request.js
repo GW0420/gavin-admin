@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
+import { isCheckTimeout } from './auth'
 import { ElMessage } from 'element-plus'
 
 const service = axios.create({
@@ -13,6 +14,11 @@ service.interceptors.request.use(config => {
   config.headers.icode = '1B1C9CC9E95F42F4'
   // 这个位置需要统一注入token
   if (store.getters.token) {
+    if (isCheckTimeout()) {
+      // 登出操作
+      store.dispatch('user/logout')
+      return Promise.reject(new Error('token 失效'))
+    }
     // 如果存在token,注入token
     config.headers.Authorization = `Bearer ${store.getters.token}`
   }
