@@ -16,7 +16,11 @@ const getters = {
   /**
    * SidebarMenu 快捷导航
    */
-  cssVar: state => variables
+  cssVar: state => variables,
+  /**
+   * 菜单伸缩功能
+   */
+  sidebarOpened: state => state.app.sidebarOpened
 }
 
 export default getters

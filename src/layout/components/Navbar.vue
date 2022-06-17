@@ -1,6 +1,8 @@
 <template>
   <div class="navbar">
-    <div class="breads">面包屑</div>
+    <div class="breads">
+      <Hamburger></Hamburger>
+    </div>
     <div class="right-menu">
       <el-dropdown trigger="click" @command="handleCommand">
         <el-avatar :size="40" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
@@ -19,6 +21,7 @@
 
 <script setup>
 import { useStore } from 'vuex'
+import Hamburger from '@/components/Hamburger'
 
 const store = useStore()
 const handleCommand = type => {
