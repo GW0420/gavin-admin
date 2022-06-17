@@ -6,6 +6,21 @@ function resolve(dir) {
 }
 
 module.exports = defineConfig({
+  css: {
+    loaderOptions: {
+      sass: {
+        // 引入全局变量和 mixin
+        // additionalData: `
+        //    @import '@/assets/styles/variables.module.scss';
+        // `
+        additionalData: (content, loaderContext) => {
+          const { resourcePath } = loaderContext
+          if (resourcePath.endsWith('variables.module.scss')) return content
+          return `@import "@/assets/styles/variables.module.scss"; ${content}`
+        }
+      }
+    }
+  },
   devServer: {
     // 配置反向代理
     proxy: {
@@ -48,6 +63,8 @@ module.exports = defineConfig({
       })
       // 结束
       .end()
+    // webpack5导入path
+    config.resolve.alias.set('path', require.resolve('path-browserify'))
   },
   transpileDependencies: true
 })
