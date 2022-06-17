@@ -1,3 +1,4 @@
+import variables from '@/assets/styles/variables.module.scss'
 /**
  * 快捷访问
  */
@@ -11,7 +12,11 @@ const getters = {
    */
   hasUserInfo: state => {
     return JSON.stringify(state.user.userInfo) !== '{}'
-  }
+  },
+  /**
+   * SidebarMenu 快捷导航
+   */
+  cssVar: state => variables
 }
 
 export default getters
