@@ -24,7 +24,18 @@
   </el-menu>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { filterRouters, generateMenus } from '@/utils/route'
+
+const router = useRouter()
+const routes = computed(() => {
+  const filterRoutes = filterRouters(router.getRoutes())
+  return generateMenus(filterRoutes)
+})
+console.log(routes.value)
+</script>
 
 <style lang="scss" scoped>
 .el-menu {

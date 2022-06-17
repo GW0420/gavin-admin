@@ -63,6 +63,8 @@ module.exports = defineConfig({
       })
       // 结束
       .end()
+    // webpack5导入path
+    config.resolve.alias.set('path', require.resolve('path-browserify'))
   },
   transpileDependencies: true
 })
