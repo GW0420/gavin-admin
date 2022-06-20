@@ -11,9 +11,9 @@
         <el-icon><Setting /></el-icon>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item command="home">首页</el-dropdown-item>
-            <el-dropdown-item command="email">邮箱: 1160192842@qq.com</el-dropdown-item>
-            <el-dropdown-item command="logout">Logout</el-dropdown-item>
+            <el-dropdown-item command="home">{{ $t('msg.navBar.home') }}</el-dropdown-item>
+            <el-dropdown-item command="email">{{ $t('msg.navBar.email') }}: gavin@qq.com</el-dropdown-item>
+            <el-dropdown-item command="logout">{{ $t('msg.navBar.logout') }}</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>

@@ -2,7 +2,7 @@ export default {
   login: {
     title: '用户登录',
     loginBtn: '登录',
-    usernameRule: '用户名为必填项',
+    usernameRule: '用户名或密码错误',
     passwordRule: '密码不能少于6位',
     desc: `
     测试权限账号：<br />
@@ -55,7 +55,7 @@ export default {
     lang: '国际化',
     guide: '功能引导',
     home: '首页',
-    course: '课程主页',
+    email: '邮箱',
     logout: '退出登录'
   },
   guide: {

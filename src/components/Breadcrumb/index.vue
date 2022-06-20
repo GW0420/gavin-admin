@@ -2,8 +2,8 @@
   <el-breadcrumb class="breadcrumb" separator="/">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item, index) in breadcrumbData" :key="item.path">
-        <span class="redirect" v-if="index == '0'" @click="handleLink(item)">{{ item.meta.title }}</span>
-        <span v-else>{{ item.meta.title }}</span>
+        <span class="redirect" v-if="index == '0'" @click="handleLink(item)">{{ generateTitle(item.meta.title) }}</span>
+        <span v-else>{{ generateTitle(item.meta.title) }}</span>
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
@@ -12,7 +12,7 @@
 <script setup>
 import { watch, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-
+import { generateTitle } from '@/utils/i18n'
 /**
  * 动态导航数据
  */
@@ -48,7 +48,7 @@ watch(
   margin-left: 10px;
   .redirect {
     cursor: pointer;
-    color: black;
+    color: #4d9ce6;
     font-weight: bold;
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div>{{ $t('msg.test') }}</div>
+  <div>{{ $t('msg.route.profile') }}</div>
 </template>
 
 <script setup></script>
