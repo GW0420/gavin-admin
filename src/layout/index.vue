@@ -4,7 +4,7 @@
     <div class="sidebar">
       <sidebar
         :class="['sidebar-content', $store.getters.sidebarOpened ? 'openSideBar' : 'hideSideBar']"
-        :style="{ background: variables.menuBg }"
+        :style="{ background: $store.getters.mainColor }"
       ></sidebar>
     </div>
     <div :class="['main-container', $store.getters.sidebarOpened ? 'openSideBar' : 'hideSideBar']">
