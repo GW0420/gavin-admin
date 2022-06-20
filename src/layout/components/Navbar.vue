@@ -5,6 +5,7 @@
       <Breadcrumb></Breadcrumb>
     </div>
     <div class="right-menu">
+      <LangSelect></LangSelect>
       <el-dropdown trigger="click" @command="handleCommand">
         <el-avatar :size="40" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
         <el-icon><Setting /></el-icon>
@@ -24,6 +25,7 @@
 import { useStore } from 'vuex'
 import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
+import LangSelect from '@/components/LangSelect'
 
 const store = useStore()
 const handleCommand = type => {
@@ -40,6 +42,10 @@ const handleCommand = type => {
   justify-content: space-between;
   align-items: center;
   .breads {
+    display: flex;
+    align-items: center;
+  }
+  .right-menu {
     display: flex;
     align-items: center;
   }

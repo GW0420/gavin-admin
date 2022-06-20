@@ -20,7 +20,11 @@ const getters = {
   /**
    * 菜单伸缩功能
    */
-  sidebarOpened: state => state.app.sidebarOpened
+  sidebarOpened: state => state.app.sidebarOpened,
+  /**
+   * 国际化
+   */
+  language: state => state.app.language
 }
 
 export default getters
