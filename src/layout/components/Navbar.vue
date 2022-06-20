@@ -5,8 +5,9 @@
       <Breadcrumb></Breadcrumb>
     </div>
     <div class="right-menu">
-      <ThemeSelect></ThemeSelect>
-      <LangSelect></LangSelect>
+      <ScreenFull class="menu-item"></ScreenFull>
+      <ThemeSelect class="menu-item"></ThemeSelect>
+      <LangSelect class="menu-item"></LangSelect>
       <el-dropdown trigger="click" @command="handleCommand">
         <el-avatar :size="40" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
         <el-icon><Setting /></el-icon>
@@ -28,6 +29,7 @@ import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
 import LangSelect from '@/components/LangSelect'
 import ThemeSelect from '@/components/ThemeSelect'
+import ScreenFull from '@/components/Screenfull'
 
 const store = useStore()
 const handleCommand = type => {
@@ -50,6 +52,10 @@ const handleCommand = type => {
   .right-menu {
     display: flex;
     align-items: center;
+    .menu-item {
+      margin-right: 10px;
+      cursor: pointer;
+    }
   }
 }
 </style>
