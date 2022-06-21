@@ -12,7 +12,7 @@
       :to="{ path: tag.fullPath }"
     >
       <div class="tags-title">
-        {{ tag.meta.title }}
+        {{ tag.title }}
         <el-icon class="icon"
           ><CircleClose v-show="!isActive(tag)" @click.prevent.stop="onCloseClick(index)"
         /></el-icon>

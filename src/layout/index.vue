@@ -74,8 +74,6 @@ import TagsView from '@/components/TagsView'
       background: #fff;
       box-shadow: 0 1px 4px #00152914;
     }
-    .tags {
-    }
     .main {
       width: 100%;
       height: calc(100% - 50px);

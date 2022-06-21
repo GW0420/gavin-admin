@@ -16,9 +16,5 @@ import en from 'element-plus/es/locale/lang/en'
 const store = useStore()
 // 定义语言切换变量
 const locale = computed(() => (store.getters.language === 'zh' ? zhCn : en))
-
-watch(locale, newvalue => {
-  console.log(newvalue)
-})
 </script>
 <style lang="less"></style>
