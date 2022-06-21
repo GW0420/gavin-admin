@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <el-form ref="formRef" :model="form" :rules="rules">
-      <div class="title">用户登录</div>
+      <div class="title">{{ $t('msg.login.title') }}</div>
       <el-form-item prop="username">
         <svg-icon icon="user" class="icon"></svg-icon>
         <el-input type="text" v-model="form.username"></el-input>
@@ -25,6 +25,10 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
+
+// i18n
+const i18n = useI18n()
 
 // 定义表单信息
 const form = reactive({
@@ -38,14 +42,14 @@ const rules = ref({
   username: [
     {
       required: true,
-      message: '用户名或密码错误',
+      message: i18n.t('msg.login.usernameRule'),
       trigger: 'blur'
     }
   ],
   password: [
     {
       required: true,
-      message: '用户名或密码错误',
+      message: i18n.t('msg.login.usernameRule'),
       trigger: 'blur'
     }
   ]

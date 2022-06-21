@@ -4,7 +4,7 @@
     :collapse="!$store.getters.sidebarOpened"
     :default-active="activeMenu"
     :uniqueOpened="true"
-    :background-color="$store.getters.cssVar.menuBg"
+    :background-color="$store.getters.mainColor"
     :text-color="$store.getters.cssVar.menuText"
     :active-text-color="$store.getters.cssVar.menuActiveText"
     router

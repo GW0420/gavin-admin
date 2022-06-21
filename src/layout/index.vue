@@ -3,14 +3,19 @@
     <!-- 左侧menu -->
     <div class="sidebar">
       <sidebar
+        id="guide-sidebar"
         :class="['sidebar-content', $store.getters.sidebarOpened ? 'openSideBar' : 'hideSideBar']"
-        :style="{ background: variables.menuBg }"
+        :style="{ background: $store.getters.mainColor }"
       ></sidebar>
     </div>
     <div :class="['main-container', $store.getters.sidebarOpened ? 'openSideBar' : 'hideSideBar']">
       <!-- 顶部导航 -->
       <div class="fix-header">
         <navbar></navbar>
+      </div>
+      <!-- tags -->
+      <div class="tags">
+        <tags-view id="guide-tags"></tags-view>
       </div>
       <!-- 内容区 -->
       <div class="main">
@@ -24,7 +29,7 @@
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar.vue'
 import AppMain from './components/AppMain.vue'
-import variables from '../assets/styles/variables.module.scss'
+import TagsView from '@/components/TagsView'
 </script>
 
 <style lang="scss">

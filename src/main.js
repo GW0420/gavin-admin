@@ -11,6 +11,8 @@ import '@/router/permission'
 import installElement from '@/utils/element'
 // 加载本地svg-icon图标
 import installIcon from '@/assets/icons/index'
+// vue-i18n
+import i18n from '@/i18n'
 
 const app = createApp(App)
 installElement(app)
@@ -18,4 +20,5 @@ installIcon(app)
 
 app.use(store)
 app.use(router)
+app.use(i18n)
 app.mount('#app')

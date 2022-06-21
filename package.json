@@ -10,10 +10,14 @@
   "dependencies": {
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
+    "driver.js": "0.9.8",
     "element-plus": "2.1.9",
+    "fuse.js": "6.4.6",
     "md5": "^2.3.0",
+    "screenfull": "5.1.0",
     "svg-sprite-loader": "6.0.9",
     "vue": "^3.2.13",
+    "vue-i18n": "^9.2.0-beta.36",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
   },

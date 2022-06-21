@@ -1,5 +1,5 @@
 <template>
-  <div>个人中心</div>
+  <div>{{ $t('msg.route.profile') }}</div>
 </template>
 
 <script setup></script>
