@@ -11,6 +11,7 @@
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "element-plus": "2.1.9",
+    "fuse.js": "6.4.6",
     "md5": "^2.3.0",
     "screenfull": "5.1.0",
     "svg-sprite-loader": "6.0.9",
