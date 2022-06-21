@@ -2,7 +2,7 @@
   <div class="navbar">
     <div class="breads">
       <Hamburger></Hamburger>
-      <Breadcrumb></Breadcrumb>
+      <Breadcrumb id="guide-breadcrumb"></Breadcrumb>
     </div>
     <div class="right-menu">
       <Guide class="menu-item"></Guide>
