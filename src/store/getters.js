@@ -28,7 +28,11 @@ const getters = {
   /**
    * 主题色
    */
-  mainColor: state => state.theme.mainColor
+  mainColor: state => state.theme.mainColor,
+  /**
+   * tags
+   */
+  tagsViewList: state => state.app.tagsViewList
 }
 
 export default getters

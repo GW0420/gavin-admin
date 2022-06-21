@@ -12,6 +12,10 @@
       <div class="fix-header">
         <navbar></navbar>
       </div>
+      <!-- tags -->
+      <div class="tags">
+        <tags-view></tags-view>
+      </div>
       <!-- 内容区 -->
       <div class="main">
         <app-main></app-main>
@@ -24,7 +28,7 @@
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar.vue'
 import AppMain from './components/AppMain.vue'
-import variables from '../assets/styles/variables.module.scss'
+import TagsView from '@/components/TagsView'
 </script>
 
 <style lang="scss">
@@ -69,6 +73,8 @@ import variables from '../assets/styles/variables.module.scss'
       box-sizing: border-box;
       background: #fff;
       box-shadow: 0 1px 4px #00152914;
+    }
+    .tags {
     }
     .main {
       width: 100%;
