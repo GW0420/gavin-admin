@@ -19,9 +19,9 @@ const getTitle = route => {
   if (!route.meta) {
     // 处理无 meta 的路由
     const pathArr = route.path.split('/')
-    title = pathArr[pathArr.length - 1]
+    return (title = pathArr[pathArr.length - 1])
   } else {
-    title = generateTitle(route.meta.title)
+    return (title = generateTitle(route.meta.title))
   }
 }
 
@@ -52,7 +52,7 @@ watchSwitchLang(() => {
       index,
       tag: {
         ...route,
-        title: generateTitle(route.meta.title)
+        title: getTitle(route)
       }
     })
   })

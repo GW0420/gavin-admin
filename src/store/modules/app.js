@@ -34,6 +34,19 @@ export default {
     changeTagsView(state, { index, tag }) {
       state.tagsViewList[index] = tag
       setItem(TAGS_VIEW, state.tagsViewList)
+    },
+    // 删除 tags
+    removeTagsView(state, paylod) {
+      if (paylod.type === 'index') {
+        state.tagsViewList.splice(paylod.index, 1)
+        return
+      } else if (paylod.type === 'other') {
+        state.tagsViewList.splice(paylod.index + 1, state.tagsViewList.length - paylod.index + 1)
+        state.tagsViewList.splice(0, paylod.index)
+      } else if (paylod.type === 'right') {
+        state.tagsViewList.splice(paylod.index + 1, state.tagsViewList.length - paylod.index + 1)
+      }
+      setItem(TAGS_VIEW, state.tagsViewList)
     }
   },
   actions: {}
