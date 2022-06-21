@@ -1,7 +1,7 @@
 <template>
   <el-dropdown trigger="click" @command="handleSetLanguage">
     <el-tooltip content="国际化">
-      <svg-icon icon="language" class="icons"></svg-icon>
+      <svg-icon id="guide-lang" icon="language" class="icons"></svg-icon>
     </el-tooltip>
     <template #dropdown>
       <el-dropdown-menu>

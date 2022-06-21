@@ -3,6 +3,7 @@
     <!-- 左侧menu -->
     <div class="sidebar">
       <sidebar
+        id="guide-sidebar"
         :class="['sidebar-content', $store.getters.sidebarOpened ? 'openSideBar' : 'hideSideBar']"
         :style="{ background: $store.getters.mainColor }"
       ></sidebar>
@@ -14,7 +15,7 @@
       </div>
       <!-- tags -->
       <div class="tags">
-        <tags-view></tags-view>
+        <tags-view id="guide-tags"></tags-view>
       </div>
       <!-- 内容区 -->
       <div class="main">

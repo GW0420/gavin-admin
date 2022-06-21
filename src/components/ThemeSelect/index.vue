@@ -1,7 +1,7 @@
 <template>
   <el-dropdown trigger="click" @command="handleSetTheme">
     <el-tooltip :content="$t('msg.theme.themeChange')">
-      <svg-icon icon="change-theme" class="icons"></svg-icon>
+      <svg-icon id="guide-theme" icon="change-theme" class="icons"></svg-icon>
     </el-tooltip>
     <template #dropdown>
       <el-dropdown-menu>

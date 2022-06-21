@@ -5,6 +5,7 @@
       <Breadcrumb></Breadcrumb>
     </div>
     <div class="right-menu">
+      <Guide class="menu-item"></Guide>
       <HeaderSearch class="menu-item"></HeaderSearch>
       <ScreenFull class="menu-item"></ScreenFull>
       <ThemeSelect class="menu-item"></ThemeSelect>
@@ -32,6 +33,7 @@ import LangSelect from '@/components/LangSelect'
 import ThemeSelect from '@/components/ThemeSelect'
 import ScreenFull from '@/components/Screenfull'
 import HeaderSearch from '@/components/HeaderSearch'
+import Guide from '@/components/Guide'
 
 const store = useStore()
 const handleCommand = type => {

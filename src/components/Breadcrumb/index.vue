@@ -1,5 +1,5 @@
 <template>
-  <el-breadcrumb class="breadcrumb" separator="/">
+  <el-breadcrumb id="guide-breadcrumb" class="breadcrumb" separator="/">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item, index) in breadcrumbData" :key="item.path">
         <span class="redirect" v-if="index == '0'" @click="handleLink(item)">{{ generateTitle(item.meta.title) }}</span>
