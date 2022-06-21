@@ -26,9 +26,9 @@
 import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { filterRouters } from '@/utils/route'
-import Fuse from 'fuse.js'
 import { generateRoutes } from './components/FuseData'
 import { watchSwitchLang } from '@/utils/i18n'
+import Fuse from 'fuse.js'
 
 // 控制 search显示
 const isShow = ref(false)
