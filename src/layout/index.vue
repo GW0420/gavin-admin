@@ -80,6 +80,7 @@ import TagsView from '@/components/TagsView'
       height: calc(100% - 50px);
       padding: 20px;
       box-sizing: border-box;
+      overflow: scroll;
     }
   }
 }
