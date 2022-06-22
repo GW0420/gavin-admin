@@ -9,3 +9,13 @@ export const UserList = data => {
     params: data
   })
 }
+
+/**
+ * 用户删除
+ */
+export const UserDelete = id => {
+  return request({
+    url: `/user-manage/detele/${id}`,
+    method: 'GET'
+  })
+}

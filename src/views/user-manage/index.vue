@@ -35,10 +35,10 @@
           </template>
         </el-table-column>
         <el-table-column :label="$t('msg.excel.action')" fixed="right" width="260">
-          <template #default>
-            <el-button type="primary" size="mini">{{ $t('msg.excel.show') }}</el-button>
-            <el-button type="info" size="mini">{{ $t('msg.excel.showRole') }}</el-button>
-            <el-button type="danger" size="mini">{{ $t('msg.excel.remove') }}</el-button>
+          <template #default="{ row }">
+            <el-button type="primary" size="mini" @click="handleUserShow(row)">{{ $t('msg.excel.show') }}</el-button>
+            <el-button type="info" size="mini" @click="handleUserRole(row)">{{ $t('msg.excel.showRole') }}</el-button>
+            <el-button type="danger" size="mini" @click="handleUserRemove(row)">{{ $t('msg.excel.remove') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -59,9 +59,11 @@
 
 <script setup>
 import { ref, onMounted, reactive } from 'vue'
-import { UserList } from '@/api/rbac'
+import { UserList, UserDelete } from '@/api/rbac'
 import { watchSwitchLang } from '@/utils/i18n'
 import { dateFilter } from '@/filter'
+import { useI18n } from 'vue-i18n'
+import { ElMessageBox, ElMessage } from 'element-plus'
 
 /**
  * 用户列表相关
@@ -131,6 +133,21 @@ onMounted(() => {
 
 // 监听语言变化
 watchSwitchLang(getUserList)
+
+/**
+ * 点击按钮事件
+ */
+const i18n = useI18n()
+const handleUserRemove = row => {
+  ElMessageBox.confirm(i18n.t('msg.excel.dialogTitle1') + row.username + i18n.t('msg.excel.dialogTitle2'), {
+    type: 'warning'
+  }).then(async () => {
+    await UserDelete(row._id)
+    ElMessage.success(i18n.t('msg.excel.removeSuccess'))
+    // 重新渲染数据
+    getUserList()
+  })
+}
 </script>
 
 <style lang="scss" scoped>
