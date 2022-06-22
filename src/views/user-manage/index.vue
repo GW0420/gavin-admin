@@ -3,7 +3,7 @@
     <el-card class="header">
       <div>
         <el-button type="primary"> {{ $t('msg.excel.importExcel') }}</el-button>
-        <el-button type="success">
+        <el-button type="success" @click="handleShowExcel">
           {{ $t('msg.excel.exportExcel') }}
         </el-button>
       </div>
@@ -54,6 +54,7 @@
       >
       </el-pagination>
     </el-card>
+    <ExportToExcel v-model:showExcelModel="showExcelModel"></ExportToExcel>
   </div>
 </template>
 
@@ -64,6 +65,15 @@ import { watchSwitchLang } from '@/utils/i18n'
 import { dateFilter } from '@/filter'
 import { useI18n } from 'vue-i18n'
 import { ElMessageBox, ElMessage } from 'element-plus'
+import ExportToExcel from './components/Export2Excel'
+
+/**
+ * excel导入导出
+ */
+const showExcelModel = ref(false)
+const handleShowExcel = () => {
+  showExcelModel.value = true
+}
 
 /**
  * 用户列表相关
