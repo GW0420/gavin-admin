@@ -29,6 +29,9 @@
                 <el-tag size="mini">{{ $t('msg.excel.openTime') }}</el-tag>
               </div>
             </div>
+            <div v-if="item.prop === 'openTime'">
+              {{ dateFilter(row.openTime) }}
+            </div>
           </template>
         </el-table-column>
         <el-table-column :label="$t('msg.excel.action')" fixed="right" width="260">
@@ -39,7 +42,6 @@
           </template>
         </el-table-column>
       </el-table>
-
       <el-pagination
         class="pagination"
         @size-change="handleSizeChange"
@@ -59,6 +61,7 @@
 import { ref, onMounted, reactive } from 'vue'
 import { UserList } from '@/api/rbac'
 import { watchSwitchLang } from '@/utils/i18n'
+import { dateFilter } from '@/filter'
 
 /**
  * 用户列表相关
