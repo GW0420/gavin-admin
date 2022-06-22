@@ -13,13 +13,13 @@ import installElement from '@/utils/element'
 import installIcon from '@/assets/icons/index'
 // vue-i18n
 import i18n from '@/i18n'
-// filter
-// import installFilter from '@/filter'
+// installDirective
+import installDirective from '@/directives'
 
 const app = createApp(App)
 installElement(app)
 installIcon(app)
-// installFilter(app)
+installDirective(app)
 
 app.use(store)
 app.use(router)

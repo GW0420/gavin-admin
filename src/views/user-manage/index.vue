@@ -60,6 +60,7 @@
 
 <script setup>
 import { ref, onMounted, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import { UserList, UserDelete } from '@/api/rbac'
 import { watchSwitchLang } from '@/utils/i18n'
 import { dateFilter } from '@/filter'
@@ -70,7 +71,13 @@ import ExportToExcel from './components/Export2Excel'
 /**
  * excel导入导出
  */
+const router = useRouter()
 const showExcelModel = ref(false)
+// 查看
+const handleUserShow = row => {
+  router.push(`/user/info/${row._id}`)
+}
+// 导出
 const handleShowExcel = () => {
   showExcelModel.value = true
 }

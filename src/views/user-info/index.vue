@@ -1,7 +1,148 @@
 <template>
-  <div>用户信息</div>
+  <div class="user-info-container">
+    <el-card class="print-box">
+      <el-button type="primary" v-print="printObj" :loading="printLoading">{{ $t('msg.userInfo.print') }}</el-button>
+    </el-card>
+    <el-card>
+      <div id="userInfoBox" class="user-info-box">
+        <!-- 标题 -->
+        <h2 class="title">{{ $t('msg.userInfo.title') }}</h2>
+        <!-- header -->
+        <div class="header">
+          <!-- 头部渲染表格 -->
+          <el-descriptions :column="2" border>
+            <el-descriptions-item :label="$t('msg.userInfo.name')">{{ detailData.username }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.sex')">{{ detailData.gender }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.nation')">{{ detailData.nationality }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.mobile')">{{ detailData.mobile }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.province')">{{ detailData.province }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.date')">{{
+              dateFilter(detailData.openTime)
+            }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.remark')" :span="2">
+              <el-tag class="remark" size="small" v-for="(item, index) in detailData.remark" :key="index">{{
+                item
+              }}</el-tag>
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.address')" :span="2">{{
+              detailData.address
+            }}</el-descriptions-item>
+          </el-descriptions>
+          <!-- 头像渲染 -->
+          <el-image class="avatar" :src="detailData.avatar" :preview-src-list="[detailData.avatar]"></el-image>
+        </div>
+        <!-- body -->
+        <div class="body">
+          <!-- 内容渲染表格 -->
+          <el-descriptions direction="vertical" :column="1" border>
+            <el-descriptions-item :label="$t('msg.userInfo.experience')">
+              <ul>
+                <li v-for="(item, index) in detailData.experience" :key="index">
+                  <span>
+                    {{ dateFilter(item.startTime, 'YYYY/MM') }}
+                    ----
+                    {{ dateFilter(item.endTime, 'YYYY/MM') }}</span
+                  >
+                  <span>{{ item.title }}</span>
+                  <span>{{ item.desc }}</span>
+                </li>
+              </ul>
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.major')">
+              {{ detailData.major }}
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.glory')">
+              {{ detailData.glory }}
+            </el-descriptions-item>
+          </el-descriptions>
+        </div>
+        <!-- foot -->
+        <div class="foot">{{ $t('msg.userInfo.foot') }}</div>
+      </div>
+    </el-card>
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { watchSwitchLang } from '@/utils/i18n'
+import { UserDetail } from '@/api/rbac'
+import { dateFilter } from '@/filter'
 
-<style lang="scss" scoped></style>
+// 数据相关
+const route = useRoute()
+const detailData = ref({})
+const getUserDetail = async () => {
+  detailData.value = await UserDetail(route.params.id)
+}
+getUserDetail()
+
+// 监听语言切换
+watchSwitchLang(getUserDetail)
+
+/**
+ * 打印相关
+ */
+const printLoading = ref(false)
+// 创建打印对象
+const printObj = {
+  // 打印区域
+  id: 'userInfoBox',
+  // 打印标题
+  popTitle: 'gavin-admin',
+  // 打印前
+  beforeOpenCallback(vue) {
+    printLoading.value = true
+  },
+  // 执行打印
+  openCallback(vue) {
+    printLoading.value = false
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.print-box {
+  margin-bottom: 20px;
+  text-align: right;
+}
+.user-info-box {
+  width: 1024px;
+  margin: 0 auto;
+  .title {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .header {
+    display: flex;
+    ::v-deep .el-descriptions {
+      flex-grow: 1;
+    }
+    .avatar {
+      width: 187px;
+      box-sizing: border-box;
+      padding: 30px 20px;
+      border: 1px solid #ebeef5;
+      border-left: none;
+    }
+    .remark {
+      margin-right: 12px;
+    }
+  }
+  .body {
+    ul {
+      list-style: none;
+      li {
+        span {
+          margin-right: 62px;
+        }
+      }
+    }
+  }
+  .foot {
+    margin-top: 42px;
+    text-align: right;
+  }
+}
+</style>
