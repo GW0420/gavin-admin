@@ -1,9 +1,9 @@
 <template>
-  <el-dialog :title="$t('msg.excel.title')" :model-value="showExcelModel" @close="closed" width="30%">
+  <el-dialog :title="$t('msg.excel.title')" :model-value="showExcelModel" @close="onClosedExport" width="30%">
     <el-input :placeholder="$t('msg.excel.placeholder')" v-model="excelName"></el-input>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="closed">{{ $t('msg.excel.close') }}</el-button>
+        <el-button @click="onClosedExport">{{ $t('msg.excel.close') }}</el-button>
         <el-button type="primary" :loading="loading" @click="onConfirmExport">{{ $t('msg.excel.confirm') }}</el-button>
       </span>
     </template>
@@ -18,6 +18,7 @@ import { watchSwitchLang } from '@/utils/i18n'
 import { UserAllList } from '@/api/rbac'
 import { USER_RELATIONS } from './Export2ExcelConstants'
 import { dateFilter } from '@/filter'
+import { export_json_to_excel } from '@/utils/Export2Excel'
 
 defineProps({
   showExcelModel: {
@@ -51,11 +52,11 @@ const onConfirmExport = async () => {
   const { list } = await UserAllList()
   allUser.value = list
   // 导入工具包
-  const excel = await import('@/utils/Export2Excel')
+  //   const excel = await import('@/utils/Export2Excel')
   // 转化后的二位数组
   const data = formatJson(USER_RELATIONS, allUser.value)
   // 导出实现
-  excel.export_json_to_excel({
+  export_json_to_excel({
     // excel 表头
     header: Object.keys(USER_RELATIONS),
     // excel 数据（二维数组结构）
@@ -69,7 +70,7 @@ const onConfirmExport = async () => {
   })
   // 关闭loading状态
   loading.value = false
-  closed()
+  onClosedExport()
 }
 
 // 该方法负责将数组转化成二维数组
@@ -96,7 +97,7 @@ const formatJson = (headers, rows) => {
 /**
  * 关闭
  */
-const closed = () => {
+const onClosedExport = () => {
   loading.value = false
   emits('update:showExcelModel', false)
 }
