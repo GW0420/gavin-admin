@@ -22,16 +22,11 @@ const props = defineProps({
 })
 const emits = defineEmits(['update:showRoleDialog'])
 
-/**
-  确定按钮点击事件
- */
+// 确定
 const handleRoleConfirm = async () => {
-  closed()
+  handleRoleCancel()
 }
-
-/**
- * 关闭
- */
+// 关闭
 const handleRoleCancel = () => {
   emits('update:showRoleDialog', false)
 }

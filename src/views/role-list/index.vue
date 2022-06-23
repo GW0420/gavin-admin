@@ -1,12 +1,12 @@
 <template>
-  <div class="">
+  <div class="role-dialog">
     <el-card>
       <el-table :data="roleList" border style="width: 100%">
         <el-table-column :label="$t('msg.role.index')" type="index" width="120"> </el-table-column>
         <el-table-column :label="$t('msg.role.name')" prop="title"> </el-table-column>
         <el-table-column :label="$t('msg.role.desc')" prop="describe"> </el-table-column>
         <el-table-column :label="$t('msg.role.action')" prop="action" width="260">
-          <el-button type="primary" size="mini" @click="handleShowRoleDialog">
+          <el-button type="primary" size="mini" @click="handleSettingRole">
             {{ $t('msg.role.assignPermissions') }}
           </el-button>
         </el-table-column>
@@ -31,7 +31,7 @@ getRoleList()
 
 // 设置权限
 const showRoleDialog = ref(false)
-const handleShowRoleDialog = () => {
+const handleSettingRole = () => {
   showRoleDialog.value = true
 }
 
