@@ -6,6 +6,7 @@ import request from '@/utils/request'
 export const UserList = data => {
   return request({
     url: '/user-manage/list',
+    method: 'GET',
     params: data
   })
 }
@@ -35,7 +36,8 @@ export const UserAllList = () => {
  */
 export const UserDetail = id => {
   return request({
-    url: `/user-manage/detail/${id}`
+    url: `/user-manage/detail/${id}`,
+    method: 'GET'
   })
 }
 
@@ -46,6 +48,29 @@ export const RoleList = () => {
   return request({
     url: '/role/list',
     method: 'GET'
+  })
+}
+
+/*
+  获取指定用户角色
+ */
+export const UserSingleRoles = id => {
+  return request({
+    url: `/user-manage/role/${id}`,
+    method: 'GET'
+  })
+}
+
+/**
+ * 为用户分配角色
+ */
+export const UpdateRole = (id, roles) => {
+  return request({
+    url: `/user-manage/update-role/${id}`,
+    method: 'POST',
+    data: {
+      roles
+    }
   })
 }
 

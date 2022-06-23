@@ -55,6 +55,11 @@
       </el-pagination>
     </el-card>
     <ExportToExcel v-model:showExcelModel="showExcelModel"></ExportToExcel>
+    <RoleDialog
+      v-model:showRoleModel="showRoleModel"
+      :userId="selectUserId"
+      @updateRoleList="updateRoleList"
+    ></RoleDialog>
   </div>
 </template>
 
@@ -67,33 +72,55 @@ import { dateFilter } from '@/filter'
 import { useI18n } from 'vue-i18n'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import ExportToExcel from './components/Export2Excel'
+import RoleDialog from './components/RoleDialog'
 
 /**
- * excel导入导出
+ * 按钮点击事件
  */
-const router = useRouter()
-const showExcelModel = ref(false)
+
 // 查看
+const router = useRouter()
 const handleUserShow = row => {
   router.push(`/user/info/${row._id}`)
 }
+// 角色
+const showRoleModel = ref(false)
+const selectUserId = ref([])
+const handleUserRole = row => {
+  showRoleModel.value = true
+  selectUserId.value = row._id
+}
+const updateRoleList = () => {
+  getUserList()
+}
 // 导出
+const showExcelModel = ref(false)
 const handleShowExcel = () => {
   showExcelModel.value = true
+}
+// 删除
+const i18n = useI18n()
+const handleUserRemove = row => {
+  ElMessageBox.confirm(i18n.t('msg.excel.dialogTitle1') + row.username + i18n.t('msg.excel.dialogTitle2'), {
+    type: 'warning'
+  }).then(async () => {
+    await UserDelete(row._id)
+    ElMessage.success(i18n.t('msg.excel.removeSuccess'))
+    // 重新渲染数据
+    getUserList()
+  })
 }
 
 /**
  * 用户列表相关
  */
-const loading = ref(false)
-const userList = ref([])
+
+// 分页事件
 const pager = reactive({
   page: 1,
   size: 10,
   total: 0
 })
-
-// 分页事件
 const handleCurrentChange = currentPage => {
   pager.page = currentPage
   getUserList()
@@ -104,6 +131,8 @@ const handleSizeChange = currentSize => {
 }
 
 // table表格
+const loading = ref(false)
+const userList = ref([])
 const userColumns = [
   {
     id: 1,
@@ -150,21 +179,6 @@ onMounted(() => {
 
 // 监听语言变化
 watchSwitchLang(getUserList)
-
-/**
- * 点击按钮事件
- */
-const i18n = useI18n()
-const handleUserRemove = row => {
-  ElMessageBox.confirm(i18n.t('msg.excel.dialogTitle1') + row.username + i18n.t('msg.excel.dialogTitle2'), {
-    type: 'warning'
-  }).then(async () => {
-    await UserDelete(row._id)
-    ElMessage.success(i18n.t('msg.excel.removeSuccess'))
-    // 重新渲染数据
-    getUserList()
-  })
-}
 </script>
 
 <style lang="scss" scoped>
