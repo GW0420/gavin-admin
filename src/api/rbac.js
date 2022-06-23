@@ -92,3 +92,14 @@ export const RoleSinglePermission = roleId => {
     url: `/role/permission/${roleId}`
   })
 }
+
+/**
+ * 为角色修改权限
+ */
+export const DistributePermission = data => {
+  return request({
+    url: '/role/distribute-permission',
+    method: 'POST',
+    data
+  })
+}

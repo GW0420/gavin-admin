@@ -23,8 +23,10 @@
 
 <script setup>
 import { defineProps, defineEmits, ref, watch } from 'vue'
-import { PermissionList, RoleSinglePermission } from '@/api/rbac'
+import { PermissionList, RoleSinglePermission, DistributePermission } from '@/api/rbac'
 import { watchSwitchLang } from '@/utils/i18n'
+import { useI18n } from 'vue-i18n'
+import { ElMessage } from 'element-plus'
 
 const props = defineProps({
   showRoleDialog: {
@@ -58,12 +60,10 @@ watchSwitchLang(getPermissionList)
 //  获取指定角色的权限, 渲染 el-tree当前角色选中项
 const treeRef = ref(null)
 const loading = ref(false)
-const checkedKeys = ref([])
 const getRoleSinglePermission = async () => {
   loading.value = true
-  const data = await RoleSinglePermission(props.roleId)
-  checkedKeys.value = data
-  treeRef.value.setCheckedKeys(Object.values(checkedKeys.value))
+  const checkedKeys = await RoleSinglePermission(props.roleId)
+  treeRef.value.setCheckedKeys(checkedKeys)
   loading.value = false
 }
 
@@ -77,7 +77,13 @@ watch(
 )
 
 // 确定
+const i18n = useI18n()
 const handleRoleConfirm = async () => {
+  await DistributePermission({
+    roleId: props.roleId,
+    permissions: treeRef.value.getCheckedKeys()
+  })
+  ElMessage.success(i18n.t('msg.role.updateRoleSuccess'))
   handleRoleCancel()
 }
 // 关闭
