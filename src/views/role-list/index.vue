@@ -6,13 +6,15 @@
         <el-table-column :label="$t('msg.role.name')" prop="title"> </el-table-column>
         <el-table-column :label="$t('msg.role.desc')" prop="describe"> </el-table-column>
         <el-table-column :label="$t('msg.role.action')" prop="action" width="260">
-          <el-button type="primary" size="mini" @click="handleSettingRole">
-            {{ $t('msg.role.assignPermissions') }}
-          </el-button>
+          <template #default="{ row }">
+            <el-button type="primary" size="mini" @click="handleSettingRole(row)">
+              {{ $t('msg.role.assignPermissions') }}
+            </el-button>
+          </template>
         </el-table-column>
       </el-table>
     </el-card>
-    <RoleDialog v-model:showRoleDialog="showRoleDialog"></RoleDialog>
+    <RoleDialog v-model:showRoleDialog="showRoleDialog" :roleId="selectRolesId"></RoleDialog>
   </div>
 </template>
 
@@ -31,8 +33,10 @@ getRoleList()
 
 // 设置权限
 const showRoleDialog = ref(false)
-const handleSettingRole = () => {
+const selectRolesId = ref([])
+const handleSettingRole = row => {
   showRoleDialog.value = true
+  selectRolesId.value = row.id
 }
 
 // 监听语言变化

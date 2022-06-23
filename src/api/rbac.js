@@ -83,3 +83,12 @@ export const PermissionList = () => {
     method: 'GET'
   })
 }
+
+/**
+ * 获取指定角色的权限
+ */
+export const RoleSinglePermission = roleId => {
+  return request({
+    url: `/role/permission/${roleId}`
+  })
+}
