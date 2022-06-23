@@ -44,9 +44,7 @@ const defaultProps = {
   label: 'permissionName'
 }
 
-/**
- * 获取所有权限列表
- */
+//  获取所有权限列表
 const permissionList = ref([])
 const getPermissionList = async () => {
   const data = await PermissionList()
@@ -57,9 +55,7 @@ getPermissionList()
 // 监听语言变化
 watchSwitchLang(getPermissionList)
 
-/**
- * 获取指定角色的权限, 渲染 el-tree当前角色选中项
- */
+//  获取指定角色的权限, 渲染 el-tree当前角色选中项
 const treeRef = ref(null)
 const loading = ref(false)
 const checkedKeys = ref([])
@@ -79,10 +75,6 @@ watch(
     getRoleSinglePermission()
   }
 )
-
-/**
- * 按钮点击事件
- */
 
 // 确定
 const handleRoleConfirm = async () => {
