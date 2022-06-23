@@ -48,3 +48,13 @@ export const RoleList = () => {
     method: 'GET'
   })
 }
+
+/**
+ * 获取所有权限
+ */
+export const PermissionList = () => {
+  return request({
+    url: '/permission/list',
+    method: 'GET'
+  })
+}
