@@ -1,6 +1,6 @@
 <template>
   <el-dialog :title="$t('msg.excel.roleDialogTitle')" :model-value="showRoleModel" @close="closed">
-    <el-checkbox-group v-model="roleSingleList">
+    <el-checkbox-group v-loading="rolesLoading" element-loading-text="Loading..." v-model="roleSingleList">
       <el-checkbox v-for="item in roleList" :key="item.id" :label="item.title"></el-checkbox>
     </el-checkbox-group>
     <template #footer>
@@ -55,6 +55,7 @@ const closed = () => {
 /**
  * 角色列表
  */
+
 // 所有角色
 const roleList = ref([])
 // 初始化角色列表接口数据
@@ -65,10 +66,13 @@ const getRoleList = async () => {
 getRoleList()
 
 // 当前用户角色
+const rolesLoading = ref(false)
 const roleSingleList = ref([])
 const getUserSingleRoles = async () => {
+  rolesLoading.value = true
   const data = await UserSingleRoles(props.userId)
   roleSingleList.value = data.role.map(item => item.title)
+  rolesLoading.value = false
 }
 // 根据userId,监听当前用户角色是否有值
 watch(
