@@ -38,3 +38,13 @@ export const UserDetail = id => {
     url: `/user-manage/detail/${id}`
   })
 }
+
+/**
+ * 获取所有角色
+ */
+export const RoleList = () => {
+  return request({
+    url: '/role/list',
+    method: 'GET'
+  })
+}
