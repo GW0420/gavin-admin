@@ -47,13 +47,18 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
-import { ArticleList } from '@/api/article'
+import { useRouter } from 'vue-router'
+import { ArticleList, DeleteArticle } from '@/api/article'
 import { watchSwitchLang } from '@/utils/i18n'
 import { relativeTime } from '@/filter'
 import { dynamicData, selectDynamicLabel, tableColumns } from './component/Dynamic'
+import { useI18n } from 'vue-i18n'
+import { ElMessage, ElMessageBox } from 'element-plus'
 
 // 数据相关
 const articleListData = ref([])
+const router = useRouter()
+const i18n = useI18n()
 const loading = ref(false)
 const pager = reactive({
   page: 1,
@@ -72,9 +77,20 @@ const handleCurrentChange = page => {
 }
 
 // 查看
-const onShowClick = () => {}
+const onShowClick = row => {
+  router.push(`/article/${row._id}`)
+}
 // 删除
-const onRemoveClick = () => {}
+const onRemoveClick = async row => {
+  ElMessageBox.confirm(i18n.t('msg.article.dialogTitle1') + row.title + i18n.t('msg.article.dialogTitle2'), {
+    type: 'warning'
+  }).then(async () => {
+    await DeleteArticle(row._id)
+    ElMessage.success(i18n.t('msg.article.removeSuccess'))
+    // 重新渲染数据
+    getArticleList()
+  })
+}
 
 // 初始化接口数据
 const getArticleList = async () => {
