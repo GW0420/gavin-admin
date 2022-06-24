@@ -3,7 +3,6 @@ import store from '@/store'
 function checkPermission(el, binding) {
   // 获取绑定的值，此处为权限
   const { value } = binding
-  console.log('value=>', value)
   // 获取所有的功能指令
   const points = store.getters.userInfo.permission.points
   // 当传入的指令集为数组时
@@ -17,7 +16,6 @@ function checkPermission(el, binding) {
       el.parentNode && el.parentNode.removeChild(el)
     }
   } else {
-    // eslint-disabled-next-line
     throw new Error('v-permission value is ["admin","editor"]')
   }
 }
