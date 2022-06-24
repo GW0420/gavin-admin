@@ -36,10 +36,10 @@ export default {
       return res
     },
     async logout(context) {
+      resetRouter()
       context.commit('setToken', '')
       context.commit('setUserInfo', {})
       removeAllItem()
-      resetRouter()
       router.push('/login')
     }
   }
