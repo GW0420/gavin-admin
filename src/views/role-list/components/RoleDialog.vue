@@ -79,6 +79,7 @@ watch(
 // 确定
 const i18n = useI18n()
 const handleRoleConfirm = async () => {
+  // 为角色分配权限
   await DistributePermission({
     roleId: props.roleId,
     permissions: treeRef.value.getCheckedKeys()
