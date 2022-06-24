@@ -2,17 +2,22 @@
   <div class="article-ranking-container">
     <el-card>
       <el-table ref="tableRef" v-loading="loading" element-loading-text="Loading..." :data="articleListData" border>
-        <el-table-column :label="$t('msg.article.ranking')" prop="ranking"></el-table-column>
-        <el-table-column :label="$t('msg.article.title')" prop="title"></el-table-column>
-        <el-table-column :label="$t('msg.article.author')" prop="author"></el-table-column>
-        <el-table-column :label="$t('msg.article.publicDate')" prop="publicDate"> </el-table-column>
-        <el-table-column :label="$t('msg.article.desc')" prop="desc"></el-table-column>
+        <el-table-column
+          v-for="item in articleListColumns"
+          :key="item.id"
+          :label="$t(`msg.article.${item.prop}`)"
+          :prop="item.prop"
+          :width="item.width"
+        >
+          <template #default="{ row }" v-if="item.prop === 'publicDate'">
+            {{ relativeTime(row.publicDate) }}
+          </template>
+        </el-table-column>
         <el-table-column :label="$t('msg.article.action')">
           <el-button type="primary" size="mini" @click="onShowClick(row)">{{ $t('msg.article.show') }}</el-button>
           <el-button type="danger" size="mini" @click="onRemoveClick(row)">{{ $t('msg.article.remove') }}</el-button>
         </el-table-column>
       </el-table>
-
       <el-pagination
         class="pagination"
         @size-change="handleSizeChange"
@@ -33,6 +38,7 @@
 import { reactive, ref } from 'vue'
 import { ArticleList } from '@/api/article'
 import { watchSwitchLang } from '@/utils/i18n'
+import { relativeTime } from '@/filter'
 
 // 数据相关
 const articleListData = ref([])
@@ -42,6 +48,30 @@ const pager = reactive({
   size: 10,
   total: 0
 })
+const articleListColumns = ref([
+  {
+    id: 1,
+    prop: 'ranking',
+    width: '200'
+  },
+  {
+    id: 2,
+    prop: 'title'
+  },
+  {
+    id: 3,
+    prop: 'author'
+  },
+  {
+    id: 4,
+    prop: 'publicDate'
+  },
+  {
+    id: 5,
+    prop: 'desc',
+    width: 500
+  }
+])
 
 // 分页事件
 const handleSizeChange = size => {
