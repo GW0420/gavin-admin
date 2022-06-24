@@ -3,7 +3,7 @@ import md5 from 'md5'
 import { setItem, getItem, removeAllItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
 import { setTimeStamp } from '@/utils/auth'
-import router from '@/router'
+import router, { resetRouter } from '@/router'
 import { ElMessage } from 'element-plus'
 
 export default {
@@ -33,11 +33,13 @@ export default {
     async getUserInfo(context) {
       const res = await UserInfo()
       context.commit('setUserInfo', res)
+      return res
     },
     async logout(context) {
       context.commit('setToken', '')
       context.commit('setUserInfo', {})
       removeAllItem()
+      resetRouter()
       router.push('/login')
     }
   }

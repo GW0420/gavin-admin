@@ -12,3 +12,5 @@ export const MAIN_COLOR = 'mainColor'
 export const DEFAULT_COLOR = '#304156'
 // tags
 export const TAGS_VIEW = 'tagsView'
+// publicRoutes
+export const PUBLIC_ROUTES = 'pbulicRoutes'
