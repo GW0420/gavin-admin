@@ -1,9 +1,20 @@
 <template>
   <div class="article-ranking-container">
+    <el-card class="header">
+      <div class="dynamic-box">
+        <span class="title">{{ $t('msg.article.dynamicTitle') }}</span>
+        <el-checkbox-group v-model="selectDynamicLabel">
+          <el-checkbox v-for="(item, index) in dynamicData" :label="item.label" :key="index">{{
+            item.label
+          }}</el-checkbox>
+        </el-checkbox-group>
+      </div>
+    </el-card>
+
     <el-card>
       <el-table ref="tableRef" v-loading="loading" element-loading-text="Loading..." :data="articleListData" border>
         <el-table-column
-          v-for="item in articleListColumns"
+          v-for="item in tableColumns"
           :key="item.id"
           :label="$t(`msg.article.${item.prop}`)"
           :prop="item.prop"
@@ -12,10 +23,10 @@
           <template #default="{ row }" v-if="item.prop === 'publicDate'">
             {{ relativeTime(row.publicDate) }}
           </template>
-        </el-table-column>
-        <el-table-column :label="$t('msg.article.action')">
-          <el-button type="primary" size="mini" @click="onShowClick(row)">{{ $t('msg.article.show') }}</el-button>
-          <el-button type="danger" size="mini" @click="onRemoveClick(row)">{{ $t('msg.article.remove') }}</el-button>
+          <template #default="{ row }" v-else-if="item.prop === 'action'">
+            <el-button type="primary" size="mini" @click="onShowClick(row)">{{ $t('msg.article.show') }}</el-button>
+            <el-button type="danger" size="mini" @click="onRemoveClick(row)">{{ $t('msg.article.remove') }}</el-button>
+          </template>
         </el-table-column>
       </el-table>
       <el-pagination
@@ -39,6 +50,7 @@ import { reactive, ref } from 'vue'
 import { ArticleList } from '@/api/article'
 import { watchSwitchLang } from '@/utils/i18n'
 import { relativeTime } from '@/filter'
+import { dynamicData, selectDynamicLabel, tableColumns } from './component/Dynamic'
 
 // 数据相关
 const articleListData = ref([])
@@ -48,30 +60,6 @@ const pager = reactive({
   size: 10,
   total: 0
 })
-const articleListColumns = ref([
-  {
-    id: 1,
-    prop: 'ranking',
-    width: '200'
-  },
-  {
-    id: 2,
-    prop: 'title'
-  },
-  {
-    id: 3,
-    prop: 'author'
-  },
-  {
-    id: 4,
-    prop: 'publicDate'
-  },
-  {
-    id: 5,
-    prop: 'desc',
-    width: 500
-  }
-])
 
 // 分页事件
 const handleSizeChange = size => {
