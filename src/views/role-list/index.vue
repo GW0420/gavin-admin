@@ -7,7 +7,12 @@
         <el-table-column :label="$t('msg.role.desc')" prop="describe"> </el-table-column>
         <el-table-column :label="$t('msg.role.action')" prop="action" width="260">
           <template #default="{ row }">
-            <el-button type="primary" size="mini" @click="handleSettingRole(row)">
+            <el-button
+              type="primary"
+              size="mini"
+              v-permission="['distributePermission']"
+              @click="handleSettingRole(row)"
+            >
               {{ $t('msg.role.assignPermissions') }}
             </el-button>
           </template>
