@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
 import { ArticleList, DeleteArticle } from '@/api/article'
 import { watchSwitchLang } from '@/utils/i18n'
@@ -102,6 +102,9 @@ const getArticleList = async () => {
   loading.value = false
 }
 getArticleList()
+
+// 处理数据不重新加载的问题
+onActivated(getArticleList)
 
 // 监听语言变化
 watchSwitchLang(getArticleList)

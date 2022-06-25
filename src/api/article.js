@@ -28,3 +28,25 @@ export const ArticleDetail = articleId => {
     url: `/article/${articleId}`
   })
 }
+
+/**
+ * 创建文章
+ */
+export const CreateArticle = data => {
+  return request({
+    url: '/article/create',
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 编辑文章详情
+ */
+export const ArticleEdit = data => {
+  return request({
+    url: '/article/edit',
+    method: 'POST',
+    data
+  })
+}

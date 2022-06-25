@@ -9,11 +9,46 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
-import { useStore } from 'vue'
+import { onMounted, defineProps, defineEmits, watch } from 'vue'
+import { useStore } from 'vuex'
 import MkEditor from '@toast-ui/editor'
 import '@toast-ui/editor/dist/toastui-editor.css'
 import '@toast-ui/editor/dist/i18n/zh-cn'
+import { watchSwitchLang } from '@/utils/i18n'
+import { commitArticle, editArticle } from './commit'
+
+const props = defineProps({
+  title: {
+    required: true,
+    type: String
+  },
+  detail: {
+    required: true,
+    type: String
+  }
+})
+const emits = defineEmits(['onSuccess'])
+
+// 处理提交
+const onSubmitClick = async () => {
+  if (props.detail && props.detail._id) {
+    // 编辑文章
+    await editArticle({
+      id: props.detail._id,
+      title: props.title,
+      content: mkEditor.getHTML()
+    })
+  } else {
+    // 创建文章
+    await commitArticle({
+      title: props.title,
+      content: mkEditor.getHTML()
+    })
+  }
+
+  mkEditor.reset()
+  emits('onSuccess')
+}
 
 // Editor实例
 let mkEditor
@@ -34,6 +69,28 @@ const initEditor = () => {
   })
   mkEditor.getMarkdown()
 }
+
+// 编辑相关
+watch(
+  () => props.detail,
+  val => {
+    if (val && val.content) {
+      mkEditor.setHTML(val.content)
+    }
+  },
+  {
+    immediate: true
+  }
+)
+
+// 监听语言变化
+watchSwitchLang(() => {
+  if (!el) return
+  const htmlStr = mkEditor.getHTML()
+  mkEditor.destroy()
+  initEditor()
+  mkEditor.setHTML(htmlStr)
+})
 </script>
 
 <style lang="scss" scoped>

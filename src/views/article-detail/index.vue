@@ -12,7 +12,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { ArticleDetail } from '@/api/article'
 import { relativeTime } from '@/filter'
 
@@ -25,6 +25,12 @@ const getArticleDetail = async () => {
   detail.value = data
 }
 getArticleDetail()
+
+// 文章编辑
+const router = useRouter()
+const onEditClick = () => {
+  router.push(`/article/editor/${articleId}`)
+}
 </script>
 
 <style lang="scss" scoped>
