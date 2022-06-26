@@ -1,5 +1,5 @@
 # gavin-admin
-vue3.2
+Vue3.2，后台前端综合解决方案。
 
 Project setup
 npm install
