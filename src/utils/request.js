@@ -11,7 +11,7 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(config => {
   // 添加icode
-  config.headers.icode = '1B1C9CC9E95F42F4'
+  config.headers.icode = '389AD1977D40304F'
   // 这个位置需要统一注入token
   if (store.getters.token) {
     if (isCheckTimeout()) {
